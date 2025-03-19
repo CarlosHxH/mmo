@@ -10,6 +10,11 @@ cd rpg-app
 ```
 ## Get started
 
+```
+npm install --save-dev cross-env
+npx cross-env RPG_TYPE=rpg npm run dev
+```
+
 Install the dependencies...
 
 ```bash

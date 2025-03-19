@@ -7,13 +7,15 @@ import {
 
 const player: RpgPlayerHooks = {
   onConnected(player: RpgPlayer) {
-    player.name = "YourName";
+    player.name = "Noname";
     player.setComponentsTop<any>(
-      [Components.hpBar({}, "{name} - {$percent}%\n\n{name}"),Components.text('')],
-      {
-        height: 15,
+      [
+        Components.hpBar({}, 'HP: {$current}/{$max} - {name}'),
+        //Components.bar('hp', 'param.maxHp', {bgColor: '#ab0606'}, 'HP: {$current}/{$max} - {name}')
+      ],{
+        height: 10,
         width: 100,
-        marginBottom: -10,
+        marginBottom: -5,
       }
     );
   },
@@ -22,14 +24,14 @@ const player: RpgPlayerHooks = {
     if (input == Control.Back) {
       player.callMainMenu();
     }
-  },
-  async onJoinMap(player: RpgPlayer) {
-    if (player.getVariable("AFTER_INTRO")) {
-      return;
+    if (input == Control.Attack) {
+      player.callMainMenu();  
     }
-    await player.showText(
-      "Bem - vindo ao início dos RPGJs.Curta apresentação da estrutura:"
-    );
+  },
+    
+  async onJoinMap(player: RpgPlayer) {
+    if (player.getVariable("AFTER_INTRO")) return;
+    //await player.showText("Bem - vindo ao início dos RPGJs.Curta apresentação da estrutura:");
     player.setVariable("AFTER_INTRO", true);
   },
 
