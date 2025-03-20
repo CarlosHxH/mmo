@@ -1,8 +1,8 @@
-import { RpgEvent, EventData, RpgPlayer } from '@rpgjs/server'
+import { RpgEvent, EventData, RpgPlayer, Components } from '@rpgjs/server'
 import Potion from '../database/potion';
 
 @EventData({
-    name: 'EV-1', 
+    name: 'EV-1',
     hitbox: {
         width: 32,
         height: 16
@@ -11,6 +11,16 @@ import Potion from '../database/potion';
 export default class VillagerEvent extends RpgEvent {
     onInit() {
         this.setGraphic('female')
+        this.setComponentsTop<any>(
+            [
+              Components.hpBar({}, 'HP: {$current}/{$max} - {name}'),
+              //Components.bar('hp', 'param.maxHp', {bgColor: '#ab0606'}, 'HP: {$current}/{$max} - {name}')
+            ],{
+              height: 10,
+              width: 100,
+              marginBottom: 0
+            }
+          );
     }
     async onAction(player: RpgPlayer) {
         await player.showText('Você me robou 10 ouro.', {

@@ -8,6 +8,7 @@ import {
 const player: RpgPlayerHooks = {
   onConnected(player: RpgPlayer) {
     player.name = "Noname";
+    player.speed = 1.5;
     player.setComponentsTop<any>(
       [
         Components.hpBar({}, 'HP: {$current}/{$max} - {name}'),
@@ -24,15 +25,12 @@ const player: RpgPlayerHooks = {
     if (input == Control.Back) {
       player.callMainMenu();
     }
-    if (input == Control.Attack) {
-      player.callMainMenu();  
-    }
   },
     
   async onJoinMap(player: RpgPlayer) {
-    if (player.getVariable("AFTER_INTRO")) return;
+    //if (player.getVariable("AFTER_INTRO")) return;
     //await player.showText("Bem - vindo ao início dos RPGJs.Curta apresentação da estrutura:");
-    player.setVariable("AFTER_INTRO", true);
+    //player.setVariable("AFTER_INTRO", true);
   },
 
   
